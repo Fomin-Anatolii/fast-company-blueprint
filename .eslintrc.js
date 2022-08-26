@@ -18,5 +18,6 @@ module.exports = {
             { anonymous: "always", named: "never" }
         ],
         quotes: ["error", "double", { allowTemplateLiterals: true }]
+        // no-unused-expressions: ["error", { "allowTernary": true }]
     }
 }
