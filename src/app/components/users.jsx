@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import User from "./user"
+import UserTable from "./usersTable"
 import Pagination from "./pagination"
 import { paginate } from "../utils/paginate"
 import PropTypes from "prop-types"
@@ -34,6 +34,13 @@ const Users = ({ users, ...rest }) => {
                 JSON.stringify(user.profession) === JSON.stringify(selectedProf)
         )
     } else filteredUsers = users
+    // const filteredUsers = selectedProf
+    //     ? (filteredUsers = users.filter(
+    //           (user) =>
+    //               JSON.stringify(user.profession) ===
+    //               JSON.stringify(selectedProf)
+    //       ))
+    //     : users
 
     const count = filteredUsers.length
     const userCrop = paginate(filteredUsers, currentPage, pageSize)
@@ -61,26 +68,7 @@ const Users = ({ users, ...rest }) => {
 
             <div className="d-flex flex-column">
                 <SearchStatus length={count} />
-                {count > 0 && (
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Имя</th>
-                                <th scope="col">Качества</th>
-                                <th scope="col">Профессия</th>
-                                <th scope="col">Встретился, раз</th>
-                                <th scope="col">Оценка</th>
-                                <th scope="col">Избранное</th>
-                                <th />
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {userCrop.map((user) => (
-                                <User key={user._id} {...rest} {...user} />
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+                {count > 0 && <UserTable users={userCrop} {...rest} />}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
