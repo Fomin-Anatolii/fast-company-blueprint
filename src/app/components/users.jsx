@@ -8,6 +8,7 @@ import api from "../api"
 import SearchStatus from "./searchStatus"
 
 const Users = ({ users, ...rest }) => {
+    console.log(users)
     const pageSize = 2
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
@@ -25,6 +26,9 @@ const Users = ({ users, ...rest }) => {
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
+    }
+    const handleSort = (item) => {
+        console.log(item)
     }
 
     let filteredUsers = null
@@ -48,6 +52,7 @@ const Users = ({ users, ...rest }) => {
     const clearFilter = () => {
         setSelectedProf()
     }
+
     return (
         <div className="d-flex">
             {professions && (
@@ -68,7 +73,9 @@ const Users = ({ users, ...rest }) => {
 
             <div className="d-flex flex-column">
                 <SearchStatus length={count} />
-                {count > 0 && <UserTable users={userCrop} {...rest} />}
+                {count > 0 && (
+                    <UserTable users={userCrop} onSort={handleSort} {...rest} />
+                )}
                 <div className="d-flex justify-content-center">
                     <Pagination
                         itemsCount={count}
