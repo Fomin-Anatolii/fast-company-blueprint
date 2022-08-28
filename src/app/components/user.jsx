@@ -1,5 +1,5 @@
 import React from "react"
-import Qualitie from "./quailitie"
+import Qualitie from "./qualitie"
 import Bookmark from "./bookmark"
 import PropTypes from "prop-types"
 
