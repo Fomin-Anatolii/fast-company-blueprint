@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
+import PropTypes from "prop-types"
+import _ from "lodash"
+
 import UserTable from "./usersTable"
 import Pagination from "./pagination"
 import { paginate } from "../utils/paginate"
-import PropTypes from "prop-types"
 import GroupList from "./goupList"
 import api from "../api"
 import SearchStatus from "./searchStatus"
-import _ from "lodash"
 
 const Users = () => {
     const pageSize = 8
@@ -14,7 +15,6 @@ const Users = () => {
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" })
-
     const [users, setUsers] = useState()
 
     useEffect(() => {
@@ -23,7 +23,6 @@ const Users = () => {
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId))
     }
-
     const handleToggleBookMark = (id) => {
         setUsers(
             users.map((user) => {
@@ -34,17 +33,13 @@ const Users = () => {
             })
         )
     }
-
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))
     })
-
     useEffect(() => setCurrentPage(1), [selectedProf])
-
     const handleProfessionSelect = (item) => {
         setSelectedProf(item)
     }
-
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
